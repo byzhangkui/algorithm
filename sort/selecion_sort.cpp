@@ -7,6 +7,7 @@ void selection_sort(std::vector<int>& vec) {
         {
             if (vec[j] < vec[index])
             {
+                //从0开始，每次选择最小的
                 index = j;
             }
         }

@@ -1,19 +1,14 @@
 #include "util.h"
 
-struct Range{
-    Range(size_t _left, size_t _right):left(_left),right(_right) 
-    {}
-
-    size_t left;
-    size_t right;
-    size_t size() { return right - left + 1; }
-};
-
-
+void merge_sort_implement(std::vector<int>& vec, Range range);
 void merge_sort_merge_subsequence(std::vector<int>& vec, Range left, Range right);
 
+void merge_sort(std::vector<int>& vec) {
+    merge_sort_implement(vec, Range(0, vec.size() - 1));
+}
+
 void merge_sort_implement(std::vector<int>& vec, Range range) {
-    std::cout << range.left << ";" << range.right << std::endl;
+    //std::cout << range.left << ";" << range.right << std::endl;
 
     if (range.right > range.left) {
         size_t middle = (range.left + range.right)/2;
@@ -68,20 +63,19 @@ void merge_sort_merge_subsequence(std::vector<int>& vec, Range left, Range right
         vec[left.left + i] = temp[i];
     }
     
+    verbose_vector(vec, Range(left.left, right.right));
     //bubble_sort(vec, range);
 }
 
-void merge_sort(std::vector<int>& vec) {
-    merge_sort_implement(vec, Range(0, vec.size() - 1));
-}
+
 
 int main()
 {
     std::vector<int> vec_to_sort = {16,2,77,29,99,200,1,3,51,22};
     std::vector<int> vec_to_sort_revert = {10,9,8,7,6,5,4,3,2,1};
-    verbose_vector(vec_to_sort_revert);
-    merge_sort(vec_to_sort_revert);
-    verbose_vector(vec_to_sort_revert);
+    verbose_vector(vec_to_sort);
+    merge_sort(vec_to_sort);
+    verbose_vector(vec_to_sort);
     std::cout << get_count() << std::endl;
     std::cout << get_compare_count() << std::endl;
     return 0;
